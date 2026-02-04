@@ -1,0 +1,48 @@
+/* Como aplicar variable 
+.container {
+  background: var(--color-primary);
+} */
+
+/* Estilos básicos */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Variables */
+:root {
+  --color-primary: #22c55e;
+  --color-black: #0f172a;
+  --color-white: #ffffff;
+  --spacing-md: 16px;
+}
+
+/* Tema claro/oscuro */
+:root[data-theme="light"] {
+  --bg: var(--color-white);
+  --text: var(--color-black);
+}
+
+:root[data-theme="dark"] {
+  --bg: #020617;
+  --text: #f8fafc;
+}
+
+/* Elementos comunes */
+/* a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+} */
