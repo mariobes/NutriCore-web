@@ -1,0 +1,16 @@
+.header-container {
+  background: var(--color-primary) !important;
+  height: 100px;
+  justify-content: center;
+}
+
+.header-toolbar {
+  width: 65%;
+  margin: 0 auto;
+}
+
+.header-image {
+  width: 50px;
+  margin-right: 20px;
+}
+

@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import { login, register, getUserByEmail } from "@/services/authService";
 import type { Login, Register } from "@/core/auth";
+import { login, register, getUserByEmail } from "@/services/authService";
 
 interface AuthState {
   token: string;
@@ -73,5 +73,5 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     } catch {
       return false;
     }
-  },
+  }
 }));
