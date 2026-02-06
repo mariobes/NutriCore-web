@@ -2,3 +2,11 @@
   padding: 0 !important;
   margin: 0 !important;
 }
+
+.container-charts {
+  display: flex;
+  background-color: var(--table-bg);
+  width: 45%;
+  min-width: 1000px;
+  justify-content: center;
+}

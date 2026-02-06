@@ -8,9 +8,7 @@ export default function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<AuthPage />} />
-
         <Route path="/userPrivate/:id" element={<Guards><UserPrivatePage /></Guards>} />
-
       </Routes>
     </BrowserRouter>
   );

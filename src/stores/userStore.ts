@@ -63,14 +63,7 @@ export const useUserStore = create<UserState>((set, get) => ({
   updateDailyWater: async (id, dailyWater) => {
     try {
       await updateDailyWater(id, dailyWater);
-
-			// spread operator de JS/TS
-      get().setTargets({ ...get().targets, dailyWaterTarget: dailyWater } as UserTargets);
-			/* Ejemplo sencillo
-					const oldTargets = { a: 1, b: 2 };
-					const newTargets = { ...oldTargets, b: 5 };
-					console.log(newTargets); // { a: 1, b: 5 } */
-					
+      get().setTargets({ ...get().targets, dailyWaterTarget: dailyWater } as UserTargets);		
       return true;
     } catch {
       return false;
