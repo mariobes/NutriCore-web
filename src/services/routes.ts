@@ -14,3 +14,7 @@ export const USER_ROUTES = {
   WATER: (id: number) => `${USER_BASE}/${id}/water`,
   TARGETS: (id: number) => `${USER_BASE}/${id}/targets`
 };
+
+export const INTAKE_ROUTES = {
+  BY_ID: (id: number) => `${USER_BASE}/${id}/intakes`
+};
