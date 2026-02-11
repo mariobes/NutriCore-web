@@ -19,7 +19,7 @@ export interface User {
 export interface UserCreateUpdate {
   name: string
   email: string
-  password?: string
+  password: string
   age: number
   height: number
   weight: number

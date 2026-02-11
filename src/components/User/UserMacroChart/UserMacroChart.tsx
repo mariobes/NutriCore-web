@@ -46,10 +46,20 @@ export default function UserMacroChart({ type, current, target }: { type: Tab, c
           {labels[type]}
         </Typography>
         <Typography className={styles['chart-value']}>
-          0
+          {type !== "kiloCalorie" && "water"
+            ? current % 1 !== 0 
+              ? (current ?? 0).toFixed(2) 
+              : current
+            : current
+          }
         </Typography>
         <Typography className={styles['chart-target']}>
-          {target - current} restantes
+          Restantes: {target - current} 
+          {type === "kiloCalorie" ? " kcal" : type === "water" ? " l" : " g"}
+        </Typography>
+        <Typography className={styles['chart-total']}>
+          Total: {target}
+          {type === "kiloCalorie" ? " kcal" : type === "water" ? " l" : " g"}
         </Typography>
       </Box>
     </Box>
