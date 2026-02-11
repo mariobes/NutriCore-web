@@ -1,7 +1,7 @@
 .chart-text {
   font-size: 1.5rem !important;
   font-weight: bold !important;
-  padding-top: 10px;
+  padding-top: 20px;
 }
 
 .chart-value {
@@ -12,5 +12,10 @@
 .chart-target {
   font-weight: bold !important;
   color: var(--text-gray);
-  padding-top: 10px;
+  padding-top: 5px;
+}
+
+.chart-total {
+  font-weight: bold !important;
+  color: var(--text-gray);
 }
