@@ -1,5 +1,5 @@
-import { useEffect, useMemo } from "react";
-import { Container, Box } from "@mui/material";
+import { useEffect, useMemo, useState } from "react";
+import { Container, Box, Button } from "@mui/material";
 import styles from "./UserPrivate.module.css";
 import type { Intake } from "@/core/intake";
 import { useAuthStore } from "@/stores/authStore";
@@ -14,21 +14,35 @@ export default function UserPrivatePage() {
   const { user, fetchUserById } = useUserStore();
   const { intakes, fetchUserIntakes } = useIntakeStore();
 
+  const [selectedDate, setSelectedDate] = useState(() => {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    return d;
+  });
+
+  const changeDay = (amount: number) => {
+    setSelectedDate(prev => {
+      const newDate = new Date(prev);
+      newDate.setDate(prev.getDate() + amount);
+      return newDate;
+    });
+  };
+
   useEffect(() => {
     fetchUserById(getUserId());
     fetchUserIntakes(getUserId());
   }, []);
 
   const todayIntakes = useMemo<Intake[]>(() => {
-    const today = new Date(2026, 1, 11);//();
-    today.setHours(0, 0, 0, 0);
-    
     return (intakes || []).filter((item: Intake) => {
+      if (!item.date) return false;
+
       const itemDate = new Date(item.date);
       itemDate.setHours(0, 0, 0, 0);
-      return itemDate.getTime() === today.getTime();
+
+      return itemDate.getTime() === selectedDate.getTime();
     });
-  }, [intakes]);
+  }, [intakes, selectedDate]);
 
   const totalMacros = useMemo(() => {
     return todayIntakes.reduce(
@@ -43,12 +57,23 @@ export default function UserPrivatePage() {
     );
   }, [todayIntakes]);
 
+  const waterUser = useMemo(() => {
+    if (!user?.dateDailyWater) return 0;
+
+    const waterDate = new Date(user.dateDailyWater);
+    waterDate.setHours(0, 0, 0, 0);
+
+    return waterDate.getTime() === selectedDate.getTime()
+      ? user.dailyWater ?? 0
+      : 0;
+  }, [user, selectedDate]);
+
   const macroCharts = [
     { type: "protein", current: totalMacros.protein, target: user?.dailyProteinTarget },
     { type: "carbohydrate", current: totalMacros.carbohydrate, target: user?.dailyCarbohydrateTarget },
     { type: "fat", current: totalMacros.fat, target: user?.dailyFatTarget },
     { type: "kiloCalorie", current: totalMacros.kiloCalorie, target: user?.dailyKilocalorieTarget },
-    { type: "water", current: user?.dailyWater, target: user?.dailyWaterTarget }
+    { type: "water", current: waterUser, target: user?.dailyWaterTarget }
   ] as const;
 
   return (
@@ -56,16 +81,32 @@ export default function UserPrivatePage() {
       <Header />
 
       <Box display="flex" flexDirection="column" alignItems="center" mt={5}>
-        <Box className={styles['container-charts']} sx={{ pt: 3, borderTopLeftRadius: 25, borderTopRightRadius: 25 }} >
-          {macroCharts.filter(({ type }) => ["protein", "carbohydrate", "fat"].includes(type)).map(({ type, current, target }) => (
-            <UserMacroChart key={type} type={type} current={current!} target={target!} />
-          ))}
+        <Box display="flex" alignItems="center" justifyContent="center" gap={3} mb={3}>
+          <Button variant="contained" size="small" sx={{ fontSize: '2rem', maxHeight: 30 }} onClick={() => changeDay(-1)}>-</Button>
+          <Box fontSize={20} fontWeight={600}>
+            {selectedDate.toLocaleDateString("es-ES", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric"
+            })}
+          </Box>
+          <Button variant="contained" size="small" sx={{ fontSize: '2rem', maxHeight: 30 }} onClick={() => changeDay(1)}>+</Button>
         </Box>
 
-        <Box className={styles['container-charts']} sx={{ pb: 3, borderBottomLeftRadius: 25, borderBottomRightRadius: 25 }} >
-          {macroCharts.filter(({ type }) => ["kiloCalorie", "water"].includes(type)).map(({ type, current, target }) => (
-            <UserMacroChart key={type} type={type} current={current!} target={target!} />
-          ))}
+        <Box className={styles['container-charts']} sx={{ pt: 3, borderTopLeftRadius: 25, borderTopRightRadius: 25 }}>
+          {macroCharts
+            .filter(({ type }) => ["protein", "carbohydrate", "fat"].includes(type))
+            .map(({ type, current, target }) => (
+              <UserMacroChart key={type} type={type} current={current!} target={target!} />
+            ))}
+        </Box>
+
+        <Box className={styles['container-charts']} sx={{ pb: 3, borderBottomLeftRadius: 25, borderBottomRightRadius: 25 }}>
+          {macroCharts
+            .filter(({ type }) => ["kiloCalorie", "water"].includes(type))
+            .map(({ type, current, target }) => (
+              <UserMacroChart key={type} type={type} current={current!} target={target!} />
+            ))}
         </Box>
 
         <UserMacroButtons />

@@ -1,9 +1,9 @@
 export interface Intake {
-	id: number
+	id?: number
 	userId: number
 	consumableId: number
 	consumableType: string
-	date: Date
+	date?: Date
 	foodQuantity?: number
 	totalKilocalories?: number
 	totalFats?: number

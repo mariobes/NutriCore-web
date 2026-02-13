@@ -55,11 +55,11 @@ export default function UserMacroChart({ type, current, target }: { type: Tab, c
         </Typography>
         <Typography className={styles['chart-target']}>
           Restantes:{" "}
-          {type !== "kiloCalorie" && "water"
-            ? current % 1 !== 0 
+          {type === "kiloCalorie" || "water" 
+            ? target - current 
+            : current % 1 !== 0
               ? (target - current).toFixed(2) 
               : current
-            : target - current
           }
           {type === "kiloCalorie" ? " kcal" : type === "water" ? " L" : " g"}
         </Typography>

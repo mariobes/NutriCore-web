@@ -8,6 +8,7 @@ export interface User {
   weight: number
   country: string
   dailyWater: number
+  dateDailyWater: Date
   dailyKilocalorieTarget: number
   dailyFatTarget: number
   dailyCarbohydrateTarget: number

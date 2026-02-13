@@ -4,6 +4,13 @@ export interface Meal {
 	name: string
 	image: string
     ingredients: MealIngredient[]
+	totalKilocalories?: number
+	totalFats?: number
+	totalCarbohydrates?: number
+	totalProteins?: number
+	totalFiber?: number
+	totalSugar?: number
+	totalSalt?: number
 }
 
 export interface MealIngredient {
