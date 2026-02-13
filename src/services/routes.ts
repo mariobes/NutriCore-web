@@ -11,7 +11,7 @@ export const AUTH_ROUTES = {
 export const USER_ROUTES = {
   BY_EMAIL: (email: string) => `${USER_BASE}/by-email?email=${email}`,
   BY_ID: (id: number) => `${USER_BASE}/${id}`,
-  WATER: (id: number) => `${USER_BASE}/${id}/water`,
+  WATER: (id: number, dailyWater: number) => `${USER_BASE}/${id}/water?dailyWater=${dailyWater}`,
   TARGETS: (id: number) => `${USER_BASE}/${id}/targets`
 };
 
