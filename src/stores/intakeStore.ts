@@ -8,7 +8,7 @@ interface IntakeState {
 
 	setIntake: (intake: Intake) => void;
   clearIntake: () => void;
-  setIntakes: (intake: Intake[]) => void;
+  setIntakes: (intakes: Intake[]) => void;
   clearIntakes: () => void;
 
 	createIntake: (id: number) => Promise<boolean>;
@@ -26,8 +26,8 @@ export const useIntakeStore = create<IntakeState>((set, get) => ({
 
 	createIntake: async (id) => {
 		try {
-			const intake = await createIntake(id);
-			get().setIntake(intake.data);
+			const res = await createIntake(id);
+			get().setIntake(res.data);
 			return true;
 		} catch {
 			return false;
