@@ -15,6 +15,16 @@ export const USER_ROUTES = {
   TARGETS: (id: number) => `${USER_BASE}/${id}/targets`
 };
 
+export const FOOD_ROUTES = {
+  BY_ID: (id: number) => `${USER_BASE}/${id}/foods`,
+  SEARCH: (id: number, query: string) => `${USER_BASE}/${id}/foods/search?query=${query}`,
+};
+
+export const MEAL_ROUTES = {
+  BY_ID: (id: number) => `${USER_BASE}/${id}/meals`,
+  SEARCH: (id: number, query: string) => `${USER_BASE}/${id}/meals/search?query=${query}`,
+};
+
 export const INTAKE_ROUTES = {
   BY_ID: (id: number) => `${USER_BASE}/${id}/intakes`
 };
