@@ -4,7 +4,7 @@ import type { Food } from "@/core/food";
 import { useAuthStore } from "@/stores/authStore";
 import { useFoodStore } from "@/stores/foodStore";
 
-export default function CreateFoodModal({ open, onClose }: { open: boolean, onClose: () => void }) {
+export default function CreateFoodDialog({ open, onClose }: { open: boolean, onClose: () => void }) {
   const { getUserId } = useAuthStore();
   const { createFood } = useFoodStore();
   

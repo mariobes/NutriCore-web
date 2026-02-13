@@ -12,7 +12,7 @@ export const deleteUser = (id: number) =>
   api.delete<void>(USER_ROUTES.BY_ID(id));
 
 export const updateDailyWater = (id: number, dailyWater: number) =>
-  api.put<void>(USER_ROUTES.WATER(id), dailyWater);
+  api.put<void>(USER_ROUTES.WATER(id, dailyWater));
 
 export const getUserTargets = (id: number) =>
   api.get<UserTargets>(USER_ROUTES.TARGETS(id));

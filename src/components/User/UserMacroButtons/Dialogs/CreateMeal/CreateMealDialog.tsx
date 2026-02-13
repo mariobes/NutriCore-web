@@ -6,7 +6,7 @@ import { useAuthStore } from "@/stores/authStore";
 import { useFoodStore } from "@/stores/foodStore";
 import { useMealStore } from "@/stores/mealStore";
 
-export default function CreateMealModal({ open, onClose }: { open: boolean, onClose: () => void }) {
+export default function CreateMealDialog({ open, onClose }: { open: boolean, onClose: () => void }) {
   const { getUserId } = useAuthStore();
   const { foods, fetchUserFoods, searchFood } = useFoodStore();
   const { createMeal } = useMealStore();
@@ -91,7 +91,6 @@ export default function CreateMealModal({ open, onClose }: { open: boolean, onCl
 
   return (
     <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
-      <DialogTitle sx={{ textAlign: "right" }}>Crear nueva comida</DialogTitle>
       <DialogContent>
         <Box display="flex" gap={3}>
           <Box
@@ -112,7 +111,6 @@ export default function CreateMealModal({ open, onClose }: { open: boolean, onCl
               value={searchQuery}
               onChange={(e) => handleSearchChange(e.target.value)}
             />
-
             <List>
               {foods?.map((food) => {
                 const isSelected = selectedFoods.some(
@@ -149,6 +147,7 @@ export default function CreateMealModal({ open, onClose }: { open: boolean, onCl
           </Box>
 
           <Box flex={1}>
+            <DialogTitle>Crear nueva comida</DialogTitle>
             <TextField
               label="Name"
               fullWidth

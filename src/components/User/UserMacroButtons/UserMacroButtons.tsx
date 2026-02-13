@@ -4,6 +4,8 @@ import IconAdd from '@mui/icons-material/AddCircleOutline';
 import styles from "./UserMacroButtons.module.css";
 import CreateFoodDialog from "./Dialogs/CreateFood/CreateFoodDialog";
 import CreateMealDialog from "./Dialogs/CreateMeal/CreateMealDialog";
+import CreateIntakeDialog from "./Dialogs/CreateIntake/CreateIntakeDialog";
+import UpdateWaterDialog from "./Dialogs/UpdateWater/UpdateWaterDialog";
 
 export default function UserMacroButtons() {
 	const [openFood, setOpenFood] = useState(false);
@@ -32,8 +34,8 @@ export default function UserMacroButtons() {
 
 			<CreateFoodDialog open={openFood} onClose={() => setOpenFood(false)} />
 			<CreateMealDialog open={openMeal} onClose={() => setOpenMeal(false)} />
-		  {/* <CreateIntakeDialog open={openIntake} onClose={() => setOpenIntake(false)} /> */}
-		  {/* <PutWaterDialog open={openWater} onClose={() => setOpenWater(false)} /> */}
+		  <CreateIntakeDialog open={openIntake} onClose={() => setOpenIntake(false)} />
+		  <UpdateWaterDialog open={openWater} onClose={() => setOpenWater(false)} />
 		</Box>
   );
 }

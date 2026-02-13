@@ -11,7 +11,7 @@ interface IntakeState {
   setIntakes: (intakes: Intake[]) => void;
   clearIntakes: () => void;
 
-	createIntake: (id: number) => Promise<boolean>;
+	createIntake: (id: number, data: Intake) => Promise<boolean>;
   fetchUserIntakes: (id: number) => Promise<boolean>;
 }
 
@@ -24,9 +24,9 @@ export const useIntakeStore = create<IntakeState>((set, get) => ({
 	setIntakes: (intakes) => set({ intakes }),
 	clearIntakes: () => set({ intakes: null }),
 
-	createIntake: async (id) => {
+	createIntake: async (id, data) => {
 		try {
-			const res = await createIntake(id);
+			const res = await createIntake(id, data);
 			get().setIntake(res.data);
 			return true;
 		} catch {
