@@ -80,7 +80,7 @@ export default function UserPrivatePage() {
     <Container maxWidth={false} className={styles.container}>
       <Header />
 
-      <Box display="flex" flexDirection="column" alignItems="center" mt={5}>
+      <Box display="flex" flexDirection="column" alignItems="center" my={5}>
         <Box display="flex" alignItems="center" justifyContent="center" gap={3} mb={3}>
           <Button variant="contained" size="small" sx={{ fontSize: '2rem', maxHeight: 30 }} onClick={() => changeDay(-1)}>-</Button>
           <Box fontSize={20} fontWeight={600}>

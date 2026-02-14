@@ -23,7 +23,7 @@ export default function UserMacroChart({ type, current, target }: { type: Tab, c
   const progress = Math.min((current / target) * 100, 100);
 
   return (
-    <Box width={250} height={250} display="flex" alignItems="center" justifyContent="center" sx={{ mx: 5 }}>
+    <Box width={250} height={250} display="flex" alignItems="center" justifyContent="center" className={styles['chart-container']}>
       
       <CircularProgress
         variant="determinate"

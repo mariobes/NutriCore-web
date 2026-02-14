@@ -1,5 +1,5 @@
 .container-buttons {
-  min-width: 1000px;
+  margin-left: 15px;
 }
 
 .container-buttons-btn {
@@ -10,4 +10,29 @@
 
 :root[data-theme="dark"] .container-buttons-btn {
   color: var(--color-black);
+}
+
+/* Responsive */
+@media (max-width: 920px) {
+  .container-buttons {
+    margin-left: 20px;
+    max-width: 900px;
+  }
+
+  .container-buttons-btn {
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 820px) {
+  .container-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .container-buttons-btn {
+    font-size: 1.2rem !important;
+    width: 250px;
+  }
 }

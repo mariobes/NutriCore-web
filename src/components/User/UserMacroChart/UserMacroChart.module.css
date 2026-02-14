@@ -1,3 +1,7 @@
+.chart-container  {
+  margin: 0 40px;
+}
+
 .chart-text {
   font-size: 1.5rem !important;
   font-weight: bold !important;
@@ -18,4 +22,17 @@
 .chart-total {
   font-weight: bold !important;
   color: var(--text-gray);
+}
+
+/* Responsive */
+@media (max-width: 1020px) {
+  .chart-container  {
+    margin: 0 5px;
+  }
+}
+
+@media (max-width: 920px) {
+  .chart-container  {
+    margin: 0 5px;
+  }
 }
