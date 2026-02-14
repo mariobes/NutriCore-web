@@ -180,7 +180,7 @@ export default function CreateMealDialog({ open, onClose }: { open: boolean, onC
                   onChange={(e) =>
                     handleQuantityChange(food.id ?? 0, Number(e.target.value))
                   }
-                  sx={{ width: 100 }}
+                  sx={{ width: '80px', minWidth: '80px' }}
                 />
               </Box>
             ))}

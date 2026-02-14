@@ -43,7 +43,7 @@ export default function UpdateWaterDialog({ open, onClose }: { open: boolean, on
       <DialogContent>
         <Box display="flex" gap={2}>
         <TextField
-          label="Daily water (L)"
+          label="Agua diaria (L)"
           type="number"
           fullWidth
           margin="normal"

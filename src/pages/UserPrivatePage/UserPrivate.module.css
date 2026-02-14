@@ -6,7 +6,29 @@
 .container-charts {
   display: flex;
   background-color: var(--table-bg);
-  width: 45%;
   min-width: 1000px;
   justify-content: center;
+}
+
+/* Responsive */
+@media (max-width: 1020px) {
+  .container-charts {
+    min-width: 900px;
+  }
+}
+
+@media (max-width: 920px) {
+  .container-charts {
+    min-width: 800px;
+  }
+}
+
+@media (max-width: 820px) {
+  .container-charts {
+    flex-direction: column;
+    align-items: center;
+    min-width: 300px;
+    gap: 20px;
+    padding: 10px;
+  }
 }
