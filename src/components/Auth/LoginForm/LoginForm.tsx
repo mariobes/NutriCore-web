@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { TextField, Button, Box, Typography } from "@mui/material";
-import styles from "./LoginForm.module.css";
 import type { Login } from "@/core/auth";
 
 interface LoginFormProps {
