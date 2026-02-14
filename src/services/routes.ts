@@ -1,4 +1,4 @@
-export const API_BASE_URL = "https://localhost:7270"; // http://localhost:4746
+export const API_BASE_URL = "https://nutricore-c7c9agcre9gghqcz.spaincentral-01.azurewebsites.net"; // https://localhost:7270 // http://localhost:4746
 
 export const AUTH_BASE = "/Auth";
 export const USER_BASE = "/Users";
