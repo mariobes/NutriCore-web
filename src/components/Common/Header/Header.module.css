@@ -26,5 +26,14 @@
   .header-toolbar {
     width: 100%;
     padding-left: 25px !important;
+    margin-top: 20px;
+  }
+
+  .header-image {
+    margin-right: 10px;
+  }
+
+  .header-title {
+    font-size: 2rem !important;
   }
 }
