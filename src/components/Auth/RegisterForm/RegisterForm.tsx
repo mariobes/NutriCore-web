@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { TextField, Button, Box, Typography } from "@mui/material";
-import styles from "./RegisterForm.module.css";
 import type { Register } from "@/core/auth";
 
 interface RegisterFormProps {

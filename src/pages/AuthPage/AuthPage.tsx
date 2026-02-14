@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Typography, Box, Button, Switch } from "@mui/material";
-import styles from "./AuthPage.module.css";
 import type { Login, Register } from "@/core/auth";
 import { useAuthStore } from "@/stores/authStore";
 import { useThemeStore } from "@/stores/themeStore";
