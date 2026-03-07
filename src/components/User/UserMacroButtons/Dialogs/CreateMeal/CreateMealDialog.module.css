@@ -78,7 +78,9 @@
 }
 
 @media (max-width: 850px) {
-  
+  .form-header {
+    flex-direction: column;
+}
 }
 
 @media (max-width: 700px) {
