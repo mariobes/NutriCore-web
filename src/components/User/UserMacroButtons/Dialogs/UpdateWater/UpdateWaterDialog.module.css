@@ -1,0 +1,9 @@
+.form-title {
+  text-align: center;
+  padding: 20px 0 !important;
+}
+
+.form-input {
+  display: flex;
+  justify-content: center;
+}

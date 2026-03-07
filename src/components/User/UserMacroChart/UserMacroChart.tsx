@@ -46,7 +46,7 @@ export default function UserMacroChart({ type, current, target }: { type: Tab, c
           {labels[type]}
         </Typography>
         <Typography className={styles['chart-value']}>
-          {type !== "kiloCalorie" && "water"
+          {type !== "kiloCalorie" && type !== "water"
             ? current % 1 !== 0 
               ? (current ?? 0).toFixed(2) 
               : current
@@ -55,7 +55,7 @@ export default function UserMacroChart({ type, current, target }: { type: Tab, c
         </Typography>
         <Typography className={styles['chart-target']}>
           Restantes:{" "}
-          {type === "kiloCalorie" || "water" 
+          {type === "kiloCalorie" || type === "water"
             ? target - current 
             : current % 1 !== 0
               ? (target - current).toFixed(2) 

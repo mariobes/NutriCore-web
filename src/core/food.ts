@@ -2,7 +2,7 @@ export interface Food {
 	id?: number
 	userId: number
 	name: string
-	image: string
+	image?: string
 	unitOfMeasurement: number
 	measurementQuantity: number
 	kilocalories: number
