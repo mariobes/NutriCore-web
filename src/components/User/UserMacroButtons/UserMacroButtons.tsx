@@ -7,7 +7,11 @@ import CreateMealDialog from "./Dialogs/CreateMeal/CreateMealDialog";
 import CreateIntakeDialog from "./Dialogs/CreateIntake/CreateIntakeDialog";
 import UpdateWaterDialog from "./Dialogs/UpdateWater/UpdateWaterDialog";
 
-export default function UserMacroButtons() {
+type Props = {
+  disabled?: boolean;
+};
+
+export default function UserMacroButtons({ disabled = false }: Props) {
 	const [openFood, setOpenFood] = useState(false);
 	const [openMeal, setOpenMeal] = useState(false);
 	const [openIntake, setOpenIntake] = useState(false);
@@ -15,19 +19,19 @@ export default function UserMacroButtons() {
 
   return (
 		<Box className={styles['container-buttons']} mt={3}>
-			<Button variant="contained" className={styles['container-buttons-btn']} onClick={() => setOpenFood(true)}
+			<Button variant="contained" className={styles['container-buttons-btn']} onClick={() => setOpenFood(true)} disabled={disabled}
 				endIcon={<IconAdd style={{ fontSize: 22, marginTop: 3 }} />}>
 				Crear alimento
 			</Button>
-			<Button variant="contained" className={styles['container-buttons-btn']} onClick={() => setOpenMeal(true)}
+			<Button variant="contained" className={styles['container-buttons-btn']} onClick={() => setOpenMeal(true)} disabled={disabled}
 				endIcon={<IconAdd style={{ fontSize: 22, marginTop: 3 }} />}>
 				Crear comida
 			</Button>
-			<Button variant="contained" className={styles['container-buttons-btn']} onClick={() => setOpenIntake(true)}
+			<Button variant="contained" className={styles['container-buttons-btn']} onClick={() => setOpenIntake(true)} disabled={disabled}
 				endIcon={<IconAdd style={{ fontSize: 22, marginTop: 3 }} />}>
 				Añadir registro
 			</Button>
-			<Button variant="contained" className={styles['container-buttons-btn']} onClick={() => setOpenWater(true)}
+			<Button variant="contained" className={styles['container-buttons-btn']} onClick={() => setOpenWater(true)} disabled={disabled}
 				endIcon={<IconAdd style={{ fontSize: 22, marginTop: 3 }} />}>
 				Introducir agua 
 			</Button>

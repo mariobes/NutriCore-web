@@ -10,7 +10,7 @@
 }
 
 .header-image {
-  width: 50px;
+  width: 60px;
   margin-right: 20px;
 }
 
@@ -26,10 +26,11 @@
   .header-toolbar {
     width: 100%;
     padding-left: 25px !important;
-    margin-top: 20px;
+    margin-top: 30px;
   }
 
   .header-image {
+    width: 50px;
     margin-right: 10px;
   }
 

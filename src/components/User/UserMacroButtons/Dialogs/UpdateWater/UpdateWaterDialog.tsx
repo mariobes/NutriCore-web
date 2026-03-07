@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Dialog, DialogTitle, DialogContent, DialogActions, Box, TextField, Button } from "@mui/material";
+import styles from "./UpdateWaterDialog.module.css";
 import { useAuthStore } from "@/stores/authStore";
 import { useUserStore } from "@/stores/userStore";
 
@@ -7,7 +8,7 @@ export default function UpdateWaterDialog({ open, onClose }: { open: boolean, on
   const { getUserId } = useAuthStore();
   const { user, fetchUserById, updateDailyWater } = useUserStore();
   
-  const [water, setWater] = useState(0);
+  const [water, setWater] = useState("");
 
   useEffect(() => {
     if (!open || !user) return;
@@ -26,11 +27,11 @@ export default function UpdateWaterDialog({ open, onClose }: { open: boolean, on
       }
     }
 
-    setWater(waterValue);
+    setWater(waterValue.toString());
   }, [open, user]);
 
   const handleSubmit = async () => {
-    const success = await updateDailyWater(getUserId(), water);
+    const success = await updateDailyWater(getUserId(), Number(water));
     if (success) {
       await fetchUserById(getUserId());
       onClose();
@@ -38,23 +39,33 @@ export default function UpdateWaterDialog({ open, onClose }: { open: boolean, on
   };
 
   return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Actualizar agua diaria</DialogTitle>
+    <Dialog open={open} onClose={onClose} slotProps={{ paper: { sx: { width: "200px", borderRadius: "24px", px: 1, py: 1 }}}}>
+      <DialogTitle className={styles['form-title']}>
+        Agua diaria
+      </DialogTitle>
       <DialogContent>
-        <Box display="flex" gap={2}>
+        <Box className={styles['form-input']}>
         <TextField
           label="Agua diaria (L)"
           type="number"
           fullWidth
           margin="normal"
           value={water}
-          onChange={(e) => setWater(parseFloat(e.target.value) || 0)}
+          onChange={(e) => setWater(e.target.value)}
+          onWheel={(e) => (e.target as HTMLInputElement).blur()}
+          sx={{ width: '120px', minWidth: '120px' }}
         />
         </Box>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Cancelar</Button>
-        <Button onClick={handleSubmit} variant="contained">Actualizar</Button>
+        <Button 
+          onClick={handleSubmit} 
+          variant="contained"
+          disabled={Number(water) <= 0}
+        >
+          Actualizar
+        </Button>
       </DialogActions>
     </Dialog>
   );
