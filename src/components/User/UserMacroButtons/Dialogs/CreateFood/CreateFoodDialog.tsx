@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Dialog, DialogTitle, DialogContent, DialogActions, Box, TextField, Button, Select, MenuItem } from "@mui/material";
+import { Dialog, DialogTitle, DialogContent, DialogActions, Box, TextField, Button, FormControl, InputLabel, Select, MenuItem, useMediaQuery } from "@mui/material";
+import styles from "./CreateFoodDialog.module.css";
 import type { Food } from "@/core/food";
 import { useAuthStore } from "@/stores/authStore";
 import { useFoodStore } from "@/stores/foodStore";
@@ -20,11 +21,15 @@ export default function CreateFoodDialog({ open, onClose }: { open: boolean, onC
   const [sugar, setSugar] = useState("");
   const [salt, setSalt] = useState("");
 
+  const isMobile = useMediaQuery("(max-width:620px)");
+
   const handleSubmit = async () => {
+    const validImage = image && isValidUrl(image) ? image : undefined;
+
     const data: Food = {
       userId: getUserId(),
       name,
-      image,
+      image: validImage,
       unitOfMeasurement: Number(unitOfMeasurement),
       measurementQuantity: Number(measurementQuantity),
       kilocalories: Number(kilocalories),
@@ -40,6 +45,15 @@ export default function CreateFoodDialog({ open, onClose }: { open: boolean, onC
     
     if (success) handleClose();
   };
+
+    const isValidUrl = (value: string) => {
+      try {
+        new URL(value);
+        return true;
+      } catch {
+        return false;
+      }
+    };
 
   const handleClose = () => {
     setName("");
@@ -57,19 +71,21 @@ export default function CreateFoodDialog({ open, onClose }: { open: boolean, onC
   };
 
   return (
-    <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Crear nuevo alimento</DialogTitle>
+    <Dialog open={open} onClose={handleClose} slotProps={{ paper: { sx: { width: "550px", borderRadius: "24px", m: 1 }}}}>
+      <DialogTitle className={styles['form-title']}>
+        Crear nuevo alimento
+      </DialogTitle>
       <DialogContent>
         <Box display="flex" gap={2}>
         <TextField
-          label="Name"
+          label="Nombre"
           fullWidth
           margin="normal"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
         <TextField
-          label="Image"
+          label="Imagen"
           margin="normal"
           value={image}
           onChange={(e) => setImage(e.target.value)}
@@ -78,90 +94,109 @@ export default function CreateFoodDialog({ open, onClose }: { open: boolean, onC
 
         <Box display="flex" gap={2}>
           <TextField
-            label="Kilocalories"
+            label={isMobile ? "Kcal" : "Kilocalorías"}
             type="number"
-            fullWidth
             margin="normal"
             value={kilocalories}
             onChange={(e) => setKilocalories(e.target.value)}
+            onWheel={(e) => (e.target as HTMLInputElement).blur()}
           />
           <TextField
-            label="Measurement quantity"
+            label={isMobile ? "Cantidad" : "Cantidad de medida"}
             type="number"
-            fullWidth
             margin="normal"
             value={measurementQuantity}
             onChange={(e) => setMeasurementQuantity(e.target.value)}
+            onWheel={(e) => (e.target as HTMLInputElement).blur()}
           />
-          <Select 
-            label="Unit of measurement" 
-            value={unitOfMeasurement} onChange={(e) => setUnitOfMeasurement(e.target.value)} 
-            sx={{ maxHeight: '50px', mt: 2.4 }}
+          <FormControl 
+            margin="normal" 
+            sx={{ minWidth: 125 }}
           >
-            <MenuItem value="0">Gramos</MenuItem>
-            <MenuItem value="1">Mililitros</MenuItem>
-            <MenuItem value="2">Litros</MenuItem>
-            <MenuItem value="3">Unidades</MenuItem>
-          </Select>
+            <InputLabel id="unit-label">
+              Unidad de medida
+            </InputLabel>
+            
+            <Select
+              labelId="unit-label"
+              value={unitOfMeasurement}
+              label="Unidad de medida"
+              onChange={(e) => setUnitOfMeasurement(Number(e.target.value))}
+            >
+              <MenuItem value={0}>Gramos</MenuItem>
+              <MenuItem value={1}>Mililitros</MenuItem>
+              <MenuItem value={2}>Litros</MenuItem>
+              <MenuItem value={3}>Unidades</MenuItem>
+            </Select>
+          </FormControl>
         </Box>
 
         <Box display="flex" gap={2}>
           <TextField
-            label="Proteins"
+            label="Grasas"
             type="number"
-            fullWidth
-            margin="normal"
-            value={proteins}
-            onChange={(e) => setProteins(e.target.value)}
-          />
-          <TextField
-            label="Carbohydrates"
-            type="number"
-            fullWidth
-            margin="normal"
-            value={carbohydrates}
-            onChange={(e) => setCarbohydrates(e.target.value)}
-          />
-          <TextField
-            label="Fats"
-            type="number"
-            fullWidth
             margin="normal"
             value={fats}
             onChange={(e) => setFats(e.target.value)}
+            onWheel={(e) => (e.target as HTMLInputElement).blur()}
+          />
+          <TextField
+            label={isMobile ? "Carbos" : "Carbohidratos"}
+            type="number"
+            margin="normal"
+            value={carbohydrates}
+            onChange={(e) => setCarbohydrates(e.target.value)}
+            onWheel={(e) => (e.target as HTMLInputElement).blur()}
+          />
+          <TextField
+            label="Proteínas"
+            type="number"
+            margin="normal"
+            value={proteins}
+            onChange={(e) => setProteins(e.target.value)}
+            onWheel={(e) => (e.target as HTMLInputElement).blur()}
           />
         </Box>
         
         <Box display="flex" gap={2}>
           <TextField
-            label="Fiber"
+            label="Fibra"
             type="number"
-            fullWidth
             margin="normal"
             value={fiber}
             onChange={(e) => setFiber(e.target.value)}
+            onWheel={(e) => (e.target as HTMLInputElement).blur()}
           />
           <TextField
-            label="Sugar"
+            label="Azúcar"
             type="number"
-            fullWidth
             margin="normal"
             value={sugar}
             onChange={(e) => setSugar(e.target.value)}
+            onWheel={(e) => (e.target as HTMLInputElement).blur()}
           />
           <TextField
-            label="Salt"
+            label="Sal"
             type="number"
-            fullWidth
             margin="normal"
             value={salt}
             onChange={(e) => setSalt(e.target.value)}
+            onWheel={(e) => (e.target as HTMLInputElement).blur()}
           />
         </Box>
       </DialogContent>
-      <DialogActions>
+      <DialogActions className={styles['dialog-buttons']}>
         <Button onClick={handleClose}>Cancelar</Button>
-        <Button onClick={handleSubmit} variant="contained">Crear</Button>
+        <Button 
+          onClick={handleSubmit} 
+          variant="contained"
+            disabled={!name || !measurementQuantity ||
+              !kilocalories || !fats || !carbohydrates || 
+              !proteins || !fiber || !sugar || !salt
+            }
+        >
+          Crear
+        </Button>
       </DialogActions>
     </Dialog>
   );

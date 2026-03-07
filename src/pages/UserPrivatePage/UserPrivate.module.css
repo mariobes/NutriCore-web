@@ -10,6 +10,17 @@
   justify-content: center;
 }
 
+.container-loading {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--table-bg);
+  min-width: 350px;
+  align-items: center;
+  border-radius: 25px;
+  padding: 25px 0 20px 0;
+  gap: 25px;
+}
+
 /* Responsive */
 @media (max-width: 1020px) {
   .container-charts {

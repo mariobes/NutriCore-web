@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Container, Box, Button } from "@mui/material";
+import { Container, Box, Button, CircularProgress, Typography } from "@mui/material";
 import styles from "./UserPrivate.module.css";
 import type { Intake } from "@/core/intake";
 import { useAuthStore } from "@/stores/authStore";
@@ -13,6 +13,8 @@ export default function UserPrivatePage() {
   const { getUserId } = useAuthStore();
   const { user, fetchUserById } = useUserStore();
   const { intakes, fetchUserIntakes } = useIntakeStore();
+  
+  const isLoading = !user || !intakes;
 
   const [selectedDate, setSelectedDate] = useState(() => {
     const d = new Date();
@@ -93,23 +95,38 @@ export default function UserPrivatePage() {
           <Button variant="contained" size="small" sx={{ fontSize: '2rem', maxHeight: 30 }} onClick={() => changeDay(1)}>+</Button>
         </Box>
 
-        <Box className={styles['container-charts']} sx={{ pt: 3, borderTopLeftRadius: 25, borderTopRightRadius: 25 }}>
-          {macroCharts
-            .filter(({ type }) => ["protein", "carbohydrate", "fat"].includes(type))
-            .map(({ type, current, target }) => (
-              <UserMacroChart key={type} type={type} current={current!} target={target!} />
-            ))}
-        </Box>
+        {isLoading ? (
+          <Box className={styles['container-loading']}>
+            <CircularProgress size={60} />
+            <Typography fontSize={20}>Cargando macronutrientes...</Typography>
+          </Box>
+        ) : null}
 
-        <Box className={styles['container-charts']} sx={{ pb: 3, borderBottomLeftRadius: 25, borderBottomRightRadius: 25 }}>
-          {macroCharts
-            .filter(({ type }) => ["kiloCalorie", "water"].includes(type))
-            .map(({ type, current, target }) => (
-              <UserMacroChart key={type} type={type} current={current!} target={target!} />
-            ))}
-        </Box>
+        {!isLoading ? (
+          <Box className={styles['container-charts']} sx={{ pt: 3, borderTopLeftRadius: 25, borderTopRightRadius: 25 }}>
+            {
+              macroCharts
+                .filter(({ type }) => ["protein", "carbohydrate", "fat"].includes(type))
+                .map(({ type, current, target }) => (
+                  <UserMacroChart key={type} type={type} current={current!} target={target!} />
+                ))
+            }
+          </Box>
+        ) : null}
 
-        <UserMacroButtons />
+        {!isLoading ? (
+          <Box className={styles['container-charts']} sx={{ pb: 3, borderBottomLeftRadius: 25, borderBottomRightRadius: 25 }}>
+            {
+              macroCharts
+                .filter(({ type }) => ["kiloCalorie", "water"].includes(type))
+                .map(({ type, current, target }) => (
+                  <UserMacroChart key={type} type={type} current={current!} target={target!} />
+                ))
+            }
+          </Box>
+        ) : null}
+
+        <UserMacroButtons disabled={isLoading} />
       </Box>
     </Container>
   );

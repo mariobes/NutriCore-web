@@ -2,7 +2,7 @@ export interface Meal {
 	id?: number
 	userId: number
 	name: string
-	image: string
+	image?: string
     ingredients: MealIngredient[]
 	totalKilocalories?: number
 	totalFats?: number
@@ -15,5 +15,5 @@ export interface Meal {
 
 export interface MealIngredient {
 	foodId: number
-	quantity: number
+	quantity: string
 }
